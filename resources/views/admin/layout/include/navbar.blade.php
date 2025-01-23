@@ -4,7 +4,7 @@
             <div class="iq-navbar-logo d-flex align-items-center justify-content-between">
                 <i class="ri-menu-line wrapper-menu"></i>
                 <a href="../backend/index.html" class="header-logo">
-                    <img src="{{ asset('admin/images/logo.png') }}" class="img-fluid rounded-normal" alt="logo">
+                    <img src="{{ asset('assets/logo/logo-1.png') }}" class="img-fluid rounded-normal" alt="logo">
                     <h5 class="logo-title ml-3">POSDash</h5>
 
                 </a>
@@ -256,7 +256,10 @@
                                             <p class="mb-0">Since 10 march, 2020</p>
                                             <div class="d-flex align-items-center justify-content-center mt-3">
                                                 <a href="../app/user-profile.html" class="btn border mr-2">Profile</a>
-                                                <a href="auth-sign-in.html" class="btn border">Sign Out</a>
+                                                <form action="{{ route('admin.logout') }}" method="post">
+                                                    @csrf
+                                                    <button type="submit" class="btn border">Sign Out</button>
+                                                </form>
                                             </div>
                                         </div>
                                     </div>

@@ -15,13 +15,13 @@
                                             <img src="{{ asset('admin/images/login/mail.png') }}" class="img-fluid"
                                                 width="80" alt="">
                                             <h2 class="mt-3 mb-0">Success !</h2>
-                                            <p class="cnf-mail mb-1">A email has been send to youremail@domain.com. Please
+                                            <p class="cnf-mail mb-1">A email has been send to {{ request('email') }} Please
                                                 check for an
                                                 email from company and click
                                                 on the included link to reset your password.</p>
                                             <div class="d-inline-block w-100">
-                                                <a href="../backend/index.html" class="btn btn-primary mt-3">Back to
-                                                    Home</a>
+                                                <a href="{{ route('admin.forgot-password') }}"
+                                                    class="btn btn-primary mt-3">Resend Link</a>
                                             </div>
                                         </div>
                                     </div>

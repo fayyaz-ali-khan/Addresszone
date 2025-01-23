@@ -14,14 +14,22 @@ use App\Http\Controllers\admin\CurrencyController;
 use App\Http\Controllers\admin\DashboardController;
 use App\Http\Controllers\admin\auth\AuthController;
 
-Route::prefix('admin')->group(function(){
 
-    Route::controller(AuthController::class)->group(function(){
-        Route::get('login','login');
-        Route::get('forgot-password','forgotPassword');
-        Route::get('reset-link-sent','resetLinkSent');
-    });
+Route::prefix('admin')->middleware('redirectAuth')->controller(AuthController::class)->group(function(){
 
+    
+        Route::get('login','create')->name('login');
+        Route::post('login','store')->name('store-login');
+        Route::get('forgot-password','forgotPassword')->name('forgot-password');
+        Route::post('reset-link-sent','createPasswordResetLink')->name('password-reset-link');
+        Route::get('reset-link-sent','linkSent')->name('password-link-sent');
+        Route::get('reset-password','resetPassword')->name('reset-password');
+        Route::post('update-password','updatePassword')->name('update-password');
+        Route::post('logout','logout')->name('logout')->middleware('auth:admin')->withoutMiddleware('redirectAuth');
+    
+});
+
+Route::prefix('admin')->middleware('auth:admin')->group(function(){
 
     Route::get('/dashboard',DashboardController::class)->name('dashboard');
     Route::resource('customers',CustomerController::class);

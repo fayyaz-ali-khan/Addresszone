@@ -12,17 +12,27 @@
                                 <div class="d-flex align-items-center auth-content">
                                     <div class="col-lg-7 align-self-center">
                                         <div class="p-3">
-                                            <h2 class="mb-2">Sign In</h2>
-                                            <p>Login to stay connected.</p>
-                                            <form action="{{ route('admin.store-login') }}" method="post">
+                                            <h2 class="mb-2">Reset Password</h2>
+                                            <p>Here enter your new password.</p>
+                                            @if ($errors->any())
+                                                @foreach ($errors->all() as $error)
+                                                    <p>{{ $error }}</p>
+                                                @endforeach
+                                            @endif
+                                            <form action="{{ route('admin.update-password') }}" method="post">
                                                 @csrf
-                                                <div class="row">
-                                                    <div class="col-lg-12">
+                                                <input type="hidden" name="token" value="{{ $token ?? '' }}"
+                                                    id="">
+                                                <div class="row mb-0">
 
+                                                    <div class="col-lg-12">
                                                         <div class="floating-label form-group">
-                                                            <input name="email" class="floating-input form-control"
-                                                                autocomplete="off" value="{{ old('email') }}">
+                                                            <input name="email" autocomplete="off"
+                                                                class="floating-input form-control" type="email">
                                                             <label>Email</label>
+                                                            @error('email')
+                                                                <p class="text-danger mt-0 p-0">{{ $message }}</p>
+                                                            @enderror
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-12">
@@ -32,25 +42,25 @@
                                                             <label>Password</label>
                                                         </div>
                                                     </div>
-                                                    <div class="col-lg-6">
-                                                        <div class="custom-control custom-checkbox mb-3">
-                                                            <input name="remember_me" type="checkbox"
-                                                                class="custom-control-input" id="customCheck1">
-                                                            <label class="custom-control-label control-label-1"
-                                                                for="customCheck1">Remember Me</label>
+                                                    <div class="col-lg-12 mb-0">
+                                                        <div class="floating-label form-group">
+                                                            <input name="password_confirmation" autocomplete="off"
+                                                                class="floating-input form-control" type="password">
+                                                            <label>Confirm Password</label>
                                                         </div>
                                                     </div>
-                                                    <div class="col-lg-6">
-                                                        <a href="{{ route('admin.forgot-password') }}"
-                                                            class="text-primary float-right">Forgot Password?</a>
-                                                    </div>
+
 
                                                 </div>
-                                                @error('email')
-                                                    <p class="text-danger"> {{ $message }}</p>
+                                                @error('password')
+                                                    <p class="text-danger mt-0 p-0">{{ $message }}</p>
                                                 @enderror
-                                                <button type="submit" class="btn btn-primary">Sign In</button>
-
+                                                <button type="submit" class="btn btn-primary">Update Password</button>
+                                                <p class="mt-3">
+                                                    Login to Account <a href="{{ route('admin.login') }}"
+                                                        class="text-primary">Sign
+                                                        In</a>
+                                                </p>
                                             </form>
                                         </div>
                                     </div>

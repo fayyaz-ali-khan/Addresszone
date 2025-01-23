@@ -15,17 +15,22 @@
                                             <h2 class="mb-2">Reset Password</h2>
                                             <p>Enter your email address and we'll send you an email with instructions to
                                                 reset your password.</p>
-                                            <form>
+                                            <form action="{{ route('admin.password-reset-link') }}" method="post">
+                                                @csrf
                                                 <div class="row">
-                                                    <div class="col-lg-12">
-                                                        <div class="floating-label form-group">
-                                                            <input class="floating-input form-control" type="email"
-                                                                placeholder=" ">
+                                                    <div class="col-lg-12 mb-0">
+                                                        <div class="mb-1 floating-label form-group">
+                                                            <input name="email" class="floating-input form-control"
+                                                                type="email" placeholder=" ">
                                                             <label>Email</label>
                                                         </div>
+                                                        @error('email')
+                                                            <strong class="mb-1 text-danger">{{ $message }}</strong>
+                                                        @enderror
                                                     </div>
+
                                                 </div>
-                                                <button type="submit" class="btn btn-primary">Reset</button>
+                                                <button type="submit" class="btn mt-2 btn-primary">Reset</button>
                                             </form>
                                         </div>
                                     </div>
