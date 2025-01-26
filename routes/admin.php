@@ -13,6 +13,8 @@ use App\Http\Controllers\admin\BankAccountController;
 use App\Http\Controllers\admin\CurrencyController;
 use App\Http\Controllers\admin\DashboardController;
 use App\Http\Controllers\admin\auth\AuthController;
+use App\Http\Controllers\admin\ProfileController;
+use App\Http\Controllers\GeneralSettingController;
 
 
 Route::prefix('admin')->middleware('redirectAuth')->controller(AuthController::class)->group(function(){
@@ -36,9 +38,11 @@ Route::prefix('admin')->middleware('auth:admin')->group(function(){
     Route::resource('orders',OrderController::class);
     Route::resource('documents',DocumentController::class);
     Route::resource('services',ServiceController::class);
-    Route::resource('coupons',CouponController::class);
+    Route::resource('coupons',CouponController::class)->except(['create','show']);
     Route::resource('reports',ReportController::class);
     Route::resource('addresses',AddressController::class);
     Route::resource('bank_accounts',BankAccountController::class);
     Route::resource('currencies',CurrencyController::class);
+    Route::resource('general_settings',GeneralSettingController::class)->only(['index','update','store']);
+    Route::resource('profile',ProfileController::class)->only(['update','edit']);
 });

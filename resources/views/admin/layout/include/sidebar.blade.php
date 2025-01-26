@@ -1,9 +1,10 @@
 <div class="iq-sidebar  sidebar-default ">
     <div class="iq-sidebar-logo d-flex align-items-center justify-content-between">
         <a href="../backend/index.html" class="header-logo">
-            <img src="{{ asset('assets/logo/logo-1.png') }}" class="img-fluid rounded-normal light-logo"
-                style="height: 48px" alt="logo">
+            <img src="{{ asset(isset($general_settings->logo) ? 'storage/' . $general_settings?->logo : 'assets/logo/logo-1.png') }}"
+                class="img-fluid rounded-normal light-logo" style="height: 48px" alt="logo">
         </a>
+
         <div class="iq-menu-bt-sidebar ml-0">
             <i class="las la-bars wrapper-menu"></i>
         </div>
@@ -167,7 +168,8 @@
                 </li>
 
                 <li class=" {{ request()->routeIs('admin.coupons.*') ? 'active' : '' }}">
-                    <a href="#coupon" class="collapsed" data-toggle="collapse" aria-expanded="false">
+                    <a href="{{ route('admin.coupons.index') }}" class="collapsed" data-toggle="collapse"
+                        aria-expanded="false">
                         <svg class="svg-icon" id="p-dash5" width="20" height="20"
                             xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
                             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -176,27 +178,9 @@
                             <line x1="1" y1="10" x2="23" y2="10"></line>
                         </svg>
                         <span class="ml-4">Coupons</span>
-                        <svg class="svg-icon iq-arrow-right arrow-active" width="20" height="20"
-                            xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
-                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <polyline points="10 15 15 20 20 15"></polyline>
-                            <path d="M4 4h7a4 4 0 0 1 4 4v12"></path>
-                        </svg>
+
                     </a>
-                    <ul id="coupon"
-                        class="iq-submenu collapse {{ request()->routeIs('admin.coupons.*') ? 'show' : '' }}"
-                        data-parent="#iq-sidebar-toggle">
-                        <li class="">
-                            <a href="{{ route('admin.coupons.index') }}">
-                                <i class="las la-minus"></i><span>List Coupon</span>
-                            </a>
-                        </li>
-                        <li class="">
-                            <a href="{{ route('admin.coupons.create') }}">
-                                <i class="las la-minus"></i><span>Add Coupon</span>
-                            </a>
-                        </li>
-                    </ul>
+
                 </li>
                 <li class=" ">
                     <a href="#sale" class="collapsed" data-toggle="collapse" aria-expanded="false">
@@ -272,6 +256,19 @@
                             <polyline points="10 9 9 9 8 9"></polyline>
                         </svg>
                         <span class="ml-4">Currency</span>
+                    </a>
+
+                </li>
+                <li class="{{ request()->routeIs('admin.general_settings.*') ? 'active' : '' }}">
+                    <a href="{{ route('admin.general_settings.index') }}" class="">
+                        <svg class="svg-icon" id="p-settings" width="20" height="20"
+                            xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="3"></circle>
+                            <path
+                                d="M19.4 12a7.5 7.5 0 0 0 .6-2h-2a5.5 5.5 0 0 1-1-2.6l1.6-1.6a7.5 7.5 0 0 0-2-2L16 7a5.5 5.5 0 0 1-2.6-1H12a7.5 7.5 0 0 0-2 .6L8.4 3a7.5 7.5 0 0 0-2 2L7 5.6A5.5 5.5 0 0 1 5 8v2a7.5 7.5 0 0 0-.6 2h2a5.5 5.5 0 0 1 1 2.6L4.6 17a7.5 7.5 0 0 0 2 2L8 17a5.5 5.5 0 0 1 2.6 1h2a7.5 7.5 0 0 0 2-.6l1.6 1.6a7.5 7.5 0 0 0 2-2L17 16a5.5 5.5 0 0 1 1-2.6h2a7.5 7.5 0 0 0-.6-2Z">
+                            </path>
+                        </svg> <span class="ml-4">Settings</span>
                     </a>
 
                 </li>

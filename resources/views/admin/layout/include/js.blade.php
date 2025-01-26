@@ -12,3 +12,6 @@
 
    <!-- app JavaScript -->
    <script src="{{ asset('admin/js/app.js') }}"></script>
+
+   <script src="{{ asset('assets/js/toastr.js') }}"></script>
+   <script src="{{ asset('assets/js/nprogress.js') }}"></script>

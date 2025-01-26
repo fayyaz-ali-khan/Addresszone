@@ -4,15 +4,20 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>POS Dash | Responsive Bootstrap 4 Admin Dashboard Template</title>
+    <title>{{ $general_settings->site_name ?? 'AddressZone' }}</title>
 
     <!-- Favicon -->
-    <link rel="shortcut icon" href="{{ asset('admin/images/favicon.ico') }}" />
+    <link rel="shortcut icon"
+        href="{{ asset(isset($general_settings->logo) ? 'storage/' . $general_settings?->favicon : 'admin/images/favicon.ico') }}" />
     <link rel="stylesheet" href="{{ asset('admin/css/backend-plugin.min.css') }}">
     <link rel="stylesheet" href="{{ asset('admin/css/backend.css?v=1.0.0') }}">
     <link rel="stylesheet" href="{{ asset('admin/vendor/@fortawesome/fontawesome-free/css/all.min.css') }}">
     <link rel="stylesheet" href="{{ asset('admin/vendor/line-awesome/dist/line-awesome/css/line-awesome.min.css') }}">
     <link rel="stylesheet" href="{{ asset('admin/vendor/remixicon/fonts/remixicon.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/toastr.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/toastr.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/nprogress.css') }}">
+
     @stack('css')
 </head>
 
@@ -58,6 +63,13 @@
     @include('admin.layout.include.footer')
     @include('admin.layout.include.js')
     @stack('js')
+    @php
+        if ($errors->any()) {
+            foreach ($errors->all() as $error) {
+                toastr()->error($error);
+            }
+        }
+    @endphp
 </body>
 
 </html>

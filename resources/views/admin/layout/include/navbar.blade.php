@@ -239,29 +239,49 @@
                         <li class="nav-item nav-icon dropdown caption-content">
                             <a href="#" class="search-toggle dropdown-toggle" id="dropdownMenuButton4"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <img src="{{ asset('admin/images/user/1.png') }}" class="img-fluid rounded"
-                                    alt="user">
+                                @auth('admin')
+                                    @php
+                                        $user = Auth::guard('admin')->user();
+                                        $user_image = $user->image;
+                                    @endphp
+                                    <img src="{{ asset($user_image ? 'storage/' . $user_image : 'admin/images/user/1.png') }}"
+                                        class="img-fluid rounded" alt="user">
+                                @endauth
+
+
                             </a>
                             <div class="iq-sub-dropdown dropdown-menu" aria-labelledby="dropdownMenuButton">
                                 <div class="card shadow-none m-0">
                                     <div class="card-body p-0 text-center">
-                                        <div class="media-body profile-detail text-center">
-                                            <img src="{{ asset('admin/images/page-img/profile-bg.jpg') }}"
-                                                alt="profile-bg" class="rounded-top img-fluid mb-4">
-                                            <img src="{{ asset('admin/images/user/1.png') }}" alt="profile-img"
-                                                class="rounded profile-img img-fluid avatar-70">
-                                        </div>
-                                        <div class="p-3">
-                                            <h5 class="mb-1">JoanDuo@property.com</h5>
-                                            <p class="mb-0">Since 10 march, 2020</p>
-                                            <div class="d-flex align-items-center justify-content-center mt-3">
-                                                <a href="../app/user-profile.html" class="btn border mr-2">Profile</a>
-                                                <form action="{{ route('admin.logout') }}" method="post">
-                                                    @csrf
-                                                    <button type="submit" class="btn border">Sign Out</button>
-                                                </form>
+                                        @auth('admin')
+                                            @php
+                                                $user = Auth::guard('admin')->user();
+                                                $user_image = $user->image;
+                                            @endphp
+                                            <div class="media-body profile-detail text-center">
+                                                <img src="{{ asset('admin/images/page-img/profile-bg.jpg') }}"
+                                                    alt="profile-bg" class="rounded-top img-fluid mb-4">
+
+                                                <img src="{{ asset($user_image ? 'storage/' . $user_image : 'admin/images/user/1.png') }}"
+                                                    class="rounded profile-img img-fluid avatar-70" alt="user">
+
                                             </div>
-                                        </div>
+                                            <div class="p-3">
+
+                                                <h5 class="mb-1">{{ $user->email }}</h5>
+                                                <p class="mb-0">{{ $user->name }}</p>
+                                                <div class="d-flex align-items-center justify-content-center mt-3">
+                                                    <a href="{{ route('admin.profile.edit', Auth::guard('admin')->user()->id) }}"
+                                                        class="btn border mr-2">Profile</a>
+                                                    <form action="{{ route('admin.logout') }}" method="post">
+                                                        @csrf
+                                                        <button type="submit" class="btn border">Sign Out</button>
+                                                    </form>
+                                                </div>
+
+                                            </div>
+                                        @endauth
+
                                     </div>
                                 </div>
                             </div>

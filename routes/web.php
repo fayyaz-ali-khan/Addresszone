@@ -1,5 +1,14 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 
-// include __DIR__ . '/admin.php';
+Route::get('',function(){
+
+    if(Auth::guard('admin')->check()){
+        return redirect()->route('admin.dashboard');
+    }
+
+    return to_route('login');
+
+});
