@@ -2,9 +2,8 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Model;
 
 class Coupon extends Model
 {
@@ -20,11 +19,13 @@ class Coupon extends Model
         'user_id',
     ];
 
-    function usedBy(){
-        return $this->belongsTo(User::class,'user_id');
+    public function usedBy()
+    {
+        return $this->belongsTo(User::class, 'user_id');
     }
 
-    function createdBy(){
-        return $this->belongsTo(Admin::class,'admin_id');
+    public function createdBy()
+    {
+        return $this->belongsTo(Admin::class, 'admin_id');
     }
 }

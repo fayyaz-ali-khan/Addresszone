@@ -17,7 +17,7 @@ class AdminFactory extends Factory
     {
         return [
             'name' => fake()->name(),
-            'username'=>'admin',
+            'username' => 'admin',
             'email' => 'admin@admin.com',
             'password' => static::$password ??= Hash::make('password'),
             'remember_token' => Str::random(10),

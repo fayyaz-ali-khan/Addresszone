@@ -11,12 +11,12 @@
                         </div>
                         <a href="#" class="btn border  btn-info add-btn shadow-none mx-2 d-none d-md-block"
                             id="add-new-btn"><i class="las la-plus mr-2"></i>New
-                            Order</a>
+                            Coupon</a>
                     </div>
                 </div>
                 <div class="col-lg-12">
                     <div class="table-responsive rounded mb-3">
-                        <table id="coupon-table" class=" table mb-0 tbl-server-info">
+                        <table id="coupon-data-table" class=" table mb-0 tbl-server-info">
                             <thead class="bg-white text-uppercase">
 
                                 <tr class="ligth ligth-data">
@@ -41,47 +41,8 @@
         </div>
 
     </div>
-
-    <x-admin.shared.model-layout>
-        <form action="{{ route('admin.coupons.store') }}" method="POST" id="coupon-form">
-            @csrf
-            <div class="modal-body">
-                <x-admin.shared.input-form-group label="Title" name="title" value="{{ old('tittle') }}"
-                    errorKey="title" />
-                <div class="row">
-                    <div class="col"><x-admin.shared.input-form-group label="Code" name="code"
-                            value="{{ old('code') }}" errorKey="code" /></div>
-                    <div class="col"><x-admin.shared.input-form-group label="Amount" name="amount"
-                            value="{{ old('amount') }}" errorKey="amount" /></div>
-                </div>
-                <div class="row">
-                    <div class="col">
-                        <div class="form-group">
-                            <label>Type</label>
-                            <select id="type" name="type" class="form-control mb-3">
-                                <option value="fixed" @selected(old('type') == 'fixed')>Fixed</option>
-                                <option value="percentage" @selected(old('type') == 'percentage')>Percentage</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="form-group">
-                            <label>Status</label>
-                            <select id="status" name="status" class="form-control mb-3">
-                                <option value="1">Active</option>
-                                <option value="0">Expire</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button class="btn btn-primary" type="submit" id="coupon-submit-btn">Add Coupon</button>
-            </div>
-        </form>
-    </x-admin.shared.model-layout>
+    {{-- Update or create modal --}}
+    @include('admin.coupons.update_or_create')
 @endsection
 
 @push('js')
@@ -89,10 +50,9 @@
 
     <script>
         $(document).ready(function() {
-            function resetForm() {
-                $('#coupon-form').trigger('reset');
-            }
-            $('#coupon-table').DataTable({
+
+            // ------------------ START: coupon data table ------------------//
+            $('#coupon-data-table').DataTable({
                 processing: true,
                 serverSide: true,
                 ajax: "{{ route('admin.coupons.index') }}",
@@ -114,9 +74,11 @@
                     },
                     {
                         data: 'created_by',
+                        name: 'admin_id'
                     },
                     {
                         data: 'used_by',
+                        name: 'user_id'
                     },
                     {
                         data: 'created_at',
@@ -134,14 +96,24 @@
                     },
                 ]
             });
+            // ------------------ END: coupon data table ------------------//
 
+            // ------------------ START: Reset coupon form after update ------------------//
+            function resetForm() {
+                $('#coupon-form').trigger('reset');
+            }
+            // ------------------ END: Reset coupon form after update ------------------//
+
+            // ------------------ START: Open coupon model for new coupon ------------------//
             $(document).on('click', '#add-new-btn', function() {
                 $('#coupon-form').attr('action', '{{ route('admin.coupons.store') }}');
                 $('#coupon-form').trigger('reset');
                 $('#_method').remove();
                 $('#coupon-submit-btn').text('Add Coupon');
-                $('#new-coupon').modal('show');
+                $('#model-coupon-model').text('Add New Coupon');
+                $('#coupon-model').modal('show');
             });
+            // ------------------ END: Open coupon model for new coupon ------------------//
 
             // ------------------ START: Edit coupon form ------------------//
             $(document).on('click', '.edit-btn', function() {
@@ -165,7 +137,8 @@
                     $('#coupon-form').append(
                         '<input type="hidden" id="_method" name="_method" value="PUT">');
                 }
-                $('#new-coupon').modal('show');
+                $('#model-coupon-model').text('Edit Coupon');
+                $('#coupon-model').modal('show');
             });
             // ------------------ END: Edit coupon form ------------------//
 
@@ -180,11 +153,11 @@
                     data: $(this).serialize(),
                     success: function(response) {
                         resetForm();
-                        $('#coupon-table').DataTable().ajax.reload();
+                        $('#coupon-data-table').DataTable().ajax.reload();
                         toastr.success(
                             response.message
                         );
-                        $('#new-coupon').modal('hide');
+                        $('#coupon-model').modal('hide');
                         NProgress.done();
                         $('#coupon-submit-btn').attr('disabled', false);
                     },
@@ -234,7 +207,7 @@
                                 _token: '{{ csrf_token() }}'
                             },
                             success: function(response) {
-                                $('#coupon-table').DataTable().ajax.reload();
+                                $('#coupon-data-table').DataTable().ajax.reload();
                                 toastr.success(
                                     response.message
                                 );

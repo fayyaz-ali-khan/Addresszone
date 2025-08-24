@@ -3,16 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Models\GeneralSetting;
-use Illuminate\Contracts\Cache\Store;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 use App\Traits\FileHandler;
-
+use Illuminate\Http\Request;
 
 class GeneralSettingController extends Controller
 {
     use FileHandler;
-    function index()
+
+    public function index()
     {
         $settings = GeneralSetting::latest()->first();
 
@@ -35,37 +33,33 @@ class GeneralSettingController extends Controller
         }
         GeneralSetting::create($validated);
         toastr()->success('General Setting created successfully!');
+
         return back();
     }
-
-
 
     public function update(Request $request, GeneralSetting $generalSetting)
     {
 
-            $validated = $request->validate($this->getRules($request->type));
+        $validated = $request->validate($this->getRules($request->type));
 
-            if ($request->type === 'logo') {
-                if ($request->hasFile('logo') && $request->file('logo')->isValid()) {
-                    
-                    $validated['logo'] = $this->updateFile($request->file('logo'),$generalSetting->logo, 'settings/logo');
-                    
-                }
-                if ($request->hasFile('favicon') && $request->file('favicon')->isValid()) {
-                    $validated['favicon'] =  $this->updateFile($request->file('favicon'),$generalSetting->favicon, 'settings/logo');   
-                }
+        if ($request->type === 'logo') {
+            if ($request->hasFile('logo') && $request->file('logo')->isValid()) {
+
+                $validated['logo'] = $this->updateFile($request->file('logo'), $generalSetting->logo, 'settings/logo');
+
             }
-    
-            $generalSetting->update($validated);
-    
-            toastr()->success('General Setting updated successfully!');
-        
-       return back();
- 
+            if ($request->hasFile('favicon') && $request->file('favicon')->isValid()) {
+                $validated['favicon'] = $this->updateFile($request->file('favicon'), $generalSetting->favicon, 'settings/logo');
+            }
+        }
+
+        $generalSetting->update($validated);
+
+        toastr()->success('General Setting updated successfully!');
+
+        return back();
 
     }
-
-
 
     private function getRules($type)
     {
@@ -117,6 +111,7 @@ class GeneralSettingController extends Controller
                 'privacy' => 'sometimes|string',
             ];
         }
+
         return [];
     }
 }

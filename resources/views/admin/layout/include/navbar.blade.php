@@ -3,17 +3,17 @@
         <nav class="navbar navbar-expand-lg navbar-light p-0">
             <div class="iq-navbar-logo d-flex align-items-center justify-content-between">
                 <i class="ri-menu-line wrapper-menu"></i>
-                <a href="../backend/index.html" class="header-logo">
+                <a href="{{ route('admin.dashboard') }}" class="header-logo">
                     <img src="{{ asset('assets/logo/logo-1.png') }}" class="img-fluid rounded-normal" alt="logo">
-                    <h5 class="logo-title ml-3">POSDash</h5>
+                    <h5 class="logo-title ml-3">AddressZone</h5>
 
                 </a>
             </div>
             <div class="iq-search-bar device-search">
-                <form action="#" class="searchbox">
+                {{-- <form action="#" class="searchbox">
                     <a class="search-link" href="#"><i class="ri-search-line"></i></a>
                     <input type="text" class="text search-input" placeholder="Search here...">
-                </form>
+                </form> --}}
             </div>
             <div class="d-flex align-items-center">
                 <button class="navbar-toggler" type="button" data-toggle="collapse"
@@ -23,7 +23,7 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav ml-auto navbar-list align-items-center">
-                        <li class="nav-item nav-icon dropdown">
+                        {{-- <li class="nav-item nav-icon dropdown">
                             <a href="#" class="search-toggle dropdown-toggle btn border add-btn"
                                 id="dropdownMenuButton02" data-toggle="dropdown" aria-haspopup="true"
                                 aria-expanded="false">
@@ -39,25 +39,17 @@
                                         <a class="iq-sub-card" href="#"><img
                                                 src="{{ asset('admin/images/small/flag-03.png') }}" alt="img-flag"
                                                 class="img-fluid mr-2">Spanish</a>
-                                        <a class="iq-sub-card" href="#"><img
-                                                src="{{ asset('admin/images/small/flag-04.png') }}" alt="img-flag"
-                                                class="img-fluid mr-2">Italian</a>
-                                        <a class="iq-sub-card" href="#"><img
-                                                src="{{ asset('admin/images/small/flag-05.png') }}" alt="img-flag"
-                                                class="img-fluid mr-2">German</a>
-                                        <a class="iq-sub-card" href="#"><img
-                                                src="{{ asset('admin/images/small/flag-06.png') }}" alt="img-flag"
-                                                class="img-fluid mr-2">Japanese</a>
+                                       
                                     </div>
                                 </div>
                             </div>
-                        </li>
-                        <li>
+                        </li> --}}
+                        {{-- <li>
                             <a href="#" class="btn border add-btn shadow-none mx-2 d-none d-md-block"
                                 data-toggle="modal" data-target="#new-order"><i class="las la-plus mr-2"></i>New
                                 Order</a>
-                        </li>
-                        <li class="nav-item nav-icon search-content">
+                        </li> --}}
+                        {{-- <li class="nav-item nav-icon search-content">
                             <a href="#" class="search-toggle rounded" id="dropdownSearch" data-toggle="dropdown"
                                 aria-haspopup="true" aria-expanded="false">
                                 <i class="ri-search-line"></i>
@@ -71,8 +63,8 @@
                                     </div>
                                 </form>
                             </div>
-                        </li>
-                        <li class="nav-item nav-icon dropdown">
+                        </li> --}}
+                        {{-- <li class="nav-item nav-icon dropdown">
                             <a href="#" class="search-toggle dropdown-toggle" id="dropdownMenuButton2"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
@@ -154,8 +146,8 @@
                                     </div>
                                 </div>
                             </div>
-                        </li>
-                        <li class="nav-item nav-icon dropdown">
+                        </li> --}}
+                        {{-- <li class="nav-item nav-icon dropdown">
                             <a href="#" class="search-toggle dropdown-toggle" id="dropdownMenuButton"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
@@ -235,7 +227,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </li>
+                        </li> --}}
                         <li class="nav-item nav-icon dropdown caption-content">
                             <a href="#" class="search-toggle dropdown-toggle" id="dropdownMenuButton4"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

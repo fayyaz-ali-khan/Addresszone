@@ -19,8 +19,24 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name',
+        'first_name',
+        'last_name',
+        'mobile',
         'email',
         'password',
+        'email_verified_at',
+        'address',
+        'document_delivery_address',
+        'company_name',
+        'country',
+        'CNIC_Front_Image',
+        'CNIC_Back_Image',
+        'Passport_Front_Image',
+        'verification_status',
+        'verification_msg',
+        'stripe_customer_id',
+        'stripe_subscription_id',
+        'status',
     ];
 
     /**

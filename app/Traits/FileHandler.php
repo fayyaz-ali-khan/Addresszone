@@ -29,4 +29,11 @@ trait FileHandler
 
         return $oldFilePath;
     }
+
+    public function deleteFile($filePath, $disk = 'public')
+    {
+        if ($filePath && Storage::disk($disk)->exists($filePath)) {
+            Storage::disk($disk)->delete($filePath);
+        }
+    }
 }

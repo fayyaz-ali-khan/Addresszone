@@ -27,7 +27,7 @@
                 <div id="{{ $type }}_editor" style="height: 150px;">
                     {!! old($type, $settings[$type] ?? '') !!}
                 </div>
-                <x-shared.input-error field="about" />
+                <x-Shared.input-error field="about" />
 
                 <button type="submit" class="btn btn-primary mt-2">Submit</button>
                 </form>

@@ -25,9 +25,9 @@
                                     @include('admin.settings.include.bank_info')
                                 </div>
                             </div>
-                            <x-shared.editor-form-layout type="about" :settings="$settings ?? ''" />
-                            <x-shared.editor-form-layout type="privacy" :settings="$settings ?? ''" />
-                            <x-shared.editor-form-layout type="terms" :settings="$settings ?? ''" />
+                            <x-Shared.editor-form-layout type="about" :settings="$settings ?? ''" />
+                            <x-Shared.editor-form-layout type="privacy" :settings="$settings ?? ''" />
+                            <x-Shared.editor-form-layout type="terms" :settings="$settings ?? ''" />
 
                         </div>
                     </div>

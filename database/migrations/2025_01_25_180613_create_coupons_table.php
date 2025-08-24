@@ -16,7 +16,7 @@ return new class extends Migration
             $table->foreignId('admin_id')->constrained()->cascadeOnDelete()->cascadeOnUpdate()->comment('By which Admin added this coupon');
             $table->foreignId('user_id')->nullable()->constrained()->cascadeOnDelete()->cascadeOnUpdate()->comment('The customer who use the coupon');
             $table->string('title');
-            $table->string('code',24)->unique();
+            $table->string('code', 24)->unique();
             $table->char('type')->default('fixed');
             $table->decimal('amount', 8, 2);
             $table->boolean('status')->default(true)->comment('0=>used,1=>active');

@@ -22,7 +22,7 @@ class ViewProvider extends ServiceProvider
     public function boot(): void
     {
         View::composer('*', function ($view) {
-            $general_settings=GeneralSetting::select('logo','favicon','site_name')->first();
+            $general_settings = GeneralSetting::select('logo', 'favicon', 'site_name')->first();
             $view->with('general_settings', $general_settings);
         });
     }

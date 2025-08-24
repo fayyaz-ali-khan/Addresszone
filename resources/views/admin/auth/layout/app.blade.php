@@ -13,6 +13,13 @@
     <link rel="stylesheet" href="{{ asset('admin/vendor/@fortawesome/fontawesome-free/css/all.min.css') }}">
     <link rel="stylesheet" href="{{ asset('admin/vendor/line-awesome/dist/line-awesome/css/line-awesome.min.css') }}">
     <link rel="stylesheet" href="{{ asset('admin/vendor/remixicon/fonts/remixicon.css') }}">
+    <style>
+        input:-webkit-autofill {
+            -webkit-box-shadow: 0 0 0 1000px white inset !important;
+            box-shadow: 0 0 0 1000px white inset !important;
+            /* -webkit-text-fill-color: #000 !important; */
+        }
+    </style>
 </head>
 
 <body class=" ">
@@ -22,8 +29,6 @@
         </div>
     </div>
     <!-- loader END -->
-
-
 
     @yield('main-content')
 

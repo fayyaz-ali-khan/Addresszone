@@ -18,29 +18,29 @@
                                 @method('PUT')
                                 <div class="row">
                                     <div class="col-md-6">
-                                        <x-admin.shared.input-form-group label="Name *" name="name"
+                                        <x-Admin.Shared.input-form-group label="Name *" name="name"
                                             value="{{ old('name', $user->name) }}" errorKey="name" />
 
                                     </div>
                                     <div class="col-md-6">
-                                        <x-admin.shared.input-form-group label="User Name *" name="username"
+                                        <x-Admin.Shared.input-form-group label="User Name *" name="username"
                                             value="{{ old('username', $user->username) }}" errorKey="username" />
                                     </div>
                                     <div class="col-md-6">
-                                        <x-admin.shared.input-form-group label="email *" name="email" type="email"
+                                        <x-Admin.Shared.input-form-group label="email *" name="email" type="email"
                                             value="{{ old('email', $user->email) }}" errorKey="email" />
                                     </div>
                                     <div class="col-md-6">
 
-                                        <x-admin.shared.input-form-group label="Current Password *" type="password"
+                                        <x-Admin.Shared.input-form-group label="Current Password *" type="password"
                                             name="current_password" errorKey="current_password" />
                                     </div>
                                     <div class="col-md-6">
-                                        <x-admin.shared.input-form-group label="New Password" name="password"
+                                        <x-Admin.Shared.input-form-group label="New Password" name="password"
                                             type="password" errorKey="password" />
                                     </div>
                                     <div class="col-md-6">
-                                        <x-admin.shared.input-form-group label="Confirm Password"
+                                        <x-Admin.Shared.input-form-group label="Confirm Password"
                                             name="password_confirmation" errorKey="password_confirmation" type="password" />
                                     </div>
                                     <div class="col-md-6">

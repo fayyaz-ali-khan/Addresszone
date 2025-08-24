@@ -1,14 +1,13 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
 
-Route::get('',function(){
+Route::get('', function () {
 
-    if(Auth::guard('admin')->check()){
-        return redirect()->route('admin.dashboard');
+    if (Auth::guard('admin')->check()) {
+        return to_route('admin.dashboard', status: 301);
     }
 
-    return to_route('login');
-
+    return to_route('admin.login');
 });

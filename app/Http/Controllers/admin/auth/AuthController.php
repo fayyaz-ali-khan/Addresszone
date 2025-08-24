@@ -3,12 +3,12 @@
 namespace App\Http\Controllers\admin\auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Admin;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Str;
-use App\Models\Admin;
 
 class AuthController extends Controller
 {
@@ -28,10 +28,12 @@ class AuthController extends Controller
 
         if ($this->attemptLogin($credentials, $request)) {
             toastr()->success('Login successfully to the Admin panel');
+
             return redirect()->intended('admin/dashboard');
         }
 
         toastr()->error('The provided credentials do not match our records.');
+
         return back()->withErrors([
             'email' => 'The provided credentials do not match our records.',
         ])->onlyInput('email');
@@ -50,6 +52,7 @@ class AuthController extends Controller
         Auth::guard('admin')->logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
+
         return to_route('admin.login');
     }
 
@@ -68,10 +71,12 @@ class AuthController extends Controller
 
         if ($status === Password::RESET_LINK_SENT) {
             toastr()->success('Password reset link sent to your email');
+
             return to_route('admin.password-link-sent', ['email' => $request->email]);
         }
 
         toastr()->error('Password reset link not sent. Please try again.');
+
         return back()->withErrors(['email' => __($status)]);
     }
 
@@ -85,6 +90,7 @@ class AuthController extends Controller
     public function resetPassword(Request $request)
     {
         $request->validate(['token' => 'required']);
+
         return view('admin.auth.reset_password', ['token' => $request->token]);
     }
 
@@ -109,10 +115,12 @@ class AuthController extends Controller
 
         if ($status === Password::PASSWORD_RESET) {
             toastr()->success('Password updated successfully');
+
             return redirect()->route('admin.login')->with('status', __($status));
         }
 
         toastr()->error('Password update failed. Please try again.');
+
         return back()->withErrors(['email' => [__($status)]]);
     }
 }

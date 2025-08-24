@@ -1,6 +1,6 @@
 <?php
 
-namespace App\View\Components\shared;
+namespace App\View\Components\Shared;
 
 use Closure;
 use Illuminate\Contracts\View\View;
@@ -21,6 +21,6 @@ class EditorFormLayout extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.shared.editor-form-layout');
+        return view('components.Shared.editor-form-layout');
     }
 }

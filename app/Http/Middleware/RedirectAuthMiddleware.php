@@ -16,9 +16,10 @@ class RedirectAuthMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if(Auth::guard('admin')->check()){
-            return to_route(route:'admin.dashboard',status:301);
+        if (Auth::guard('admin')->check()) {
+            return to_route(route: 'admin.dashboard', status: 301);
         }
+
         return $next($request);
     }
 }

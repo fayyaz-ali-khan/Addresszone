@@ -20,14 +20,14 @@ class GeneralSetting extends Model
         'privacy',
         'copyright',
         'bank_details',
-        'social_links'
+        'social_links',
     ];
-    
+
     protected $attributes = [
         'bank_details' => '{"account_title" :"", "account_number" : "", "bank_name" :"", "bank_code" : ""}',
         'social_links' => '{"facebook" : "", "twitter" : "", "instagram":"", "youtube" : "", "tiktok" : "", "pinterest" : ""}',
     ];
-    
+
     protected $casts = [
         'bank_details' => 'array',
         'social_links' => 'array',

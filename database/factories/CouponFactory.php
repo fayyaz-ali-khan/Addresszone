@@ -17,12 +17,12 @@ class CouponFactory extends Factory
     public function definition(): array
     {
         return [
-            'title'=>fake()->name(),
-            'code'=>fake()->phoneNumber(),
-            'type'=>'fixed',
-            'amount'=>3.0,
-            'status'=>1,
-            'admin_id'=>1,
+            'title' => fake()->name(),
+            'code' => fake()->phoneNumber(),
+            'type' => 'fixed',
+            'amount' => 3.0,
+            'status' => 1,
+            'admin_id' => 1,
         ];
     }
 }

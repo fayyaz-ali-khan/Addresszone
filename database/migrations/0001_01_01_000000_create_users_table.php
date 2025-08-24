@@ -14,10 +14,29 @@ return new class extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->string('first_name')->nullable();
+            $table->string('last_name')->nullable();
             $table->string('email')->unique();
+            $table->integer('user_type')->default(1);
+            $table->string('mobile');
+            $table->string('image')->default('default-admin.jpeg');
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();
+            $table->binary('address')->nullable();
+            $table->binary('document_delivery_address')->nullable();
+            $table->string('company_name')->nullable();
+            $table->string('country')->nullable();
+            $table->string('CNIC_Front_Image')->nullable();
+            $table->string('CNIC_Back_Image')->nullable();
+            $table->string('Passport_Front_Image')->nullable();
+            $table->tinyInteger('verification_status')->default(0);
+            $table->text('verification_msg')->nullable();
+            $table->tinyInteger('status')->default(0);
+            $table->foreignId('created_by')->default(0);
+            $table->integer('updated_by')->default(0);
+            $table->string('stripe_customer_id')->nullable();
+            $table->string('stripe_subscription_id')->nullable();
             $table->timestamps();
         });
 

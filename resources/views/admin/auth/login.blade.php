@@ -1,6 +1,5 @@
 @extends('admin.auth.layout.app')
 
-
 @section('main-content')
     <div class="wrapper">
         <section class="login-content">
