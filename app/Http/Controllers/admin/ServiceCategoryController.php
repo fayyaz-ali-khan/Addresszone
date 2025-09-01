@@ -45,7 +45,7 @@ class ServiceCategoryController extends Controller
     public function update(Request $request, ServiceCategory $serviceCategory)
     {
         $validated = $request->validate([
-            'name' => 'required|max:54|unique:service_categories,name,' . $serviceCategory->id,
+            'name' => 'required|max:54|unique:service_categories,name,'.$serviceCategory->id,
             'description' => 'nullable|max:500',
             'status' => 'nullable|boolean',
         ]);
@@ -73,7 +73,7 @@ class ServiceCategoryController extends Controller
 
         return DataTables::of($query)
             ->editColumn('description', function ($row) {
-                return '<span title="' . $row->description . '">' . substr($row->description, 0, 36) . '</span>';
+                return '<span title="'.$row->description.'">'.substr($row->description, 0, 36).'</span>';
             })
             ->editColumn('created_at', function ($row) {
                 return $row->created_at->format('d-m-Y H:i');
@@ -89,14 +89,14 @@ class ServiceCategoryController extends Controller
                         class="badge bg-success edit-btn mr-2" 
                         data-toggle="modal" 
                         data-target="#service-category-model" 
-                        data-url="' . route('admin.service_categories.update', $row->id) . '"
-                        data-name="' . $row->name . '"
-                        data-description="' . $row->description . '"
+                        data-url="'.route('admin.service_categories.update', $row->id).'"
+                        data-name="'.$row->name.'"
+                        data-description="'.$row->description.'"
                        
-                        data-status="' . $row->status . '">
+                        data-status="'.$row->status.'">
                         <i class="ri-pencil-line mr-0"></i>
                     </a>
-                    <a class="badge bg-warning mr-2 delete-service-category" data-id="' . $row->id . '" data-toggle="tooltip" title="Delete">
+                    <a class="badge bg-warning mr-2 delete-service-category" data-id="'.$row->id.'" data-toggle="tooltip" title="Delete">
                         <i  class="ri-delete-bin-line mr-0"></i>
                     </a>
                 </div>';

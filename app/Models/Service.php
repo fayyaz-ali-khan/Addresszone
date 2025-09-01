@@ -9,12 +9,22 @@ class Service extends Model
 {
     protected $fillable = [
         'service_category_id',
-        'title', 'slug', 'price', 'months', 'image',
-        'description', 'status',
+        'title',
+        'slug',
+        'price',
+        'months',
+        'image',
+        'description',
+        'status',
     ];
 
-    public function serviceCategory(): BelongsTo
+    public function category(): BelongsTo
     {
-        return $this->belongsTo(ServiceCategory::class);
+        return $this->belongsTo(ServiceCategory::class, 'service_category_id');
+    }
+
+    public function scopeActive($query)
+    {
+        return $query->where('status', 1);
     }
 }

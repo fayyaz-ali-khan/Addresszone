@@ -33,8 +33,7 @@ class CouponController extends Controller
         $validated['admin_id'] = Auth::guard('admin')->user()->id;
         Coupon::create($validated);
 
-        return response()->json(['success' => true, 'message' => 'Coupon updated successfully.']);
-
+        return response()->json(['success' => true, 'message' => 'Coupon Created successfully.']);
     }
 
     /**
@@ -55,7 +54,6 @@ class CouponController extends Controller
         $coupon->delete();
 
         return response()->json(['success' => true, 'message' => 'Coupon deleted successfully.']);
-
     }
 
     private function getCouponDataTable()

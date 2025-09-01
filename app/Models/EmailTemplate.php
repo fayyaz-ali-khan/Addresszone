@@ -10,6 +10,6 @@ class EmailTemplate extends Model
         'subject',
         'body',
         'status',
-        'category'
+        'category',
     ];
 }

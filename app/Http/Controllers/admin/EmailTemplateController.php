@@ -3,10 +3,9 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\EmailTemplate;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
-use App\Models\EmailTemplate;
-use Illuminate\Validation\Rules\Email;
 
 class EmailTemplateController extends Controller
 {
@@ -18,6 +17,7 @@ class EmailTemplateController extends Controller
         if (request()->ajax()) {
             return $this->getCouponDataTable();
         }
+
         return view('admin.email_templates.index');
     }
 
@@ -26,8 +26,9 @@ class EmailTemplateController extends Controller
      */
     public function create()
     {
-        $templates_categories=getEmailTemplates();
-        return view('admin.email_templates.create',compact('templates_categories'));
+        $templates_categories = getEmailTemplates();
+
+        return view('admin.email_templates.create', compact('templates_categories'));
     }
 
     /**
@@ -35,12 +36,12 @@ class EmailTemplateController extends Controller
      */
     public function store(Request $request)
     {
-        $email_templates=getEmailTemplates();
-        $email_templates=array_keys($email_templates);
+        $email_templates = getEmailTemplates();
+        $email_templates = array_keys($email_templates);
         $validated = $request->validate([
             'subject' => 'required|unique:email_templates,subject',
             'body' => 'required',
-            'status'=>'required|boolean',
+            'status' => 'required|boolean',
             'category' => 'required|in:'.implode(',', $email_templates),
         ]);
 
@@ -51,19 +52,19 @@ class EmailTemplateController extends Controller
         return to_route('admin.email_templates.index');
     }
 
-
     /**
      * Show the form for editing the specified resource.
      */
     public function edit(EmailTemplate $emailTemplate)
     {
-        $templates_categories=getEmailTemplates();
-        $templates_categories=array_keys($templates_categories);
-        $assigned_category=EmailTemplate::pluck('category')->toArray();
-        $available_categories=array_diff($templates_categories,$assigned_category);
-        $available_categories[]=$emailTemplate->category;
-        $templates_categories=getEmailTemplates();
-        return view('admin.email_templates.edit',compact('emailTemplate','templates_categories','available_categories'));
+        $templates_categories = getEmailTemplates();
+        $templates_categories = array_keys($templates_categories);
+        $assigned_category = EmailTemplate::pluck('category')->toArray();
+        $available_categories = array_diff($templates_categories, $assigned_category);
+        $available_categories[] = $emailTemplate->category;
+        $templates_categories = getEmailTemplates();
+
+        return view('admin.email_templates.edit', compact('emailTemplate', 'templates_categories', 'available_categories'));
     }
 
     /**
@@ -74,7 +75,7 @@ class EmailTemplateController extends Controller
         $validated = $request->validate([
             'subject' => 'required|unique:email_templates,subject,'.$emailTemplate->id,
             'body' => 'required',
-            'status'=>'required|boolean',
+            'status' => 'required|boolean',
             'category' => 'required|in:'.implode(',', array_keys(getEmailTemplates())),
         ]);
 
@@ -85,8 +86,6 @@ class EmailTemplateController extends Controller
         return to_route('admin.email_templates.index');
     }
 
-
-    
     private function getCouponDataTable()
     {
 
@@ -111,7 +110,7 @@ class EmailTemplateController extends Controller
                     </a>
                   ';
             })
-            ->rawColumns([ 'status', 'actions'])
+            ->rawColumns(['status', 'actions'])
             ->make(true);
     }
 }

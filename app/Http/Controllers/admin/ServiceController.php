@@ -136,7 +136,7 @@ class ServiceController extends Controller
                 return $row->status == 0 ? '<span class="badge bg-danger-light">Deactive</span>' : '<span class="badge bg-primary-light">Active</span>';
             })->editColumn('image', function ($row) {
                 return '<div class="iq-avatar">
-                           <img class="avatar-70 rounded" src="' . asset('storage/' . $row->image) . '" alt="#" data-original-title="" title="">
+                           <img class="avatar-70 rounded" src="'.asset('storage/'.$row->image).'" alt="#" data-original-title="" title="">
                         </div>';
             })
             ->editColumn('serviceCategory', function ($row) {
@@ -148,11 +148,11 @@ class ServiceController extends Controller
                 <div class="d-flex align-items-center justify-content-end list-action">
                     <a 
                         class="badge bg-success edit-btn mr-2" 
-                        href="' . route('admin.services.edit', $row->id) . '"
+                        href="'.route('admin.services.edit', $row->id).'"
                         >
                         <i class="ri-pencil-line mr-0"></i>
                     </a>
-                    <a class="badge bg-warning mr-2 delete-service" data-id="' . $row->id . '" data-toggle="tooltip" title="Delete">
+                    <a class="badge bg-warning mr-2 delete-service" data-id="'.$row->id.'" data-toggle="tooltip" title="Delete">
                         <i  class="ri-delete-bin-line mr-0"></i>
                     </a>
                 </div>';
