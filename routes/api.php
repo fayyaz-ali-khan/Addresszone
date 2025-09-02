@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\Api\V1\Auth\AuthController;
 use App\Http\Controllers\Api\V1\Auth\PasswordResetController;
+use App\Http\Controllers\Api\V1\BlogCategoryController;
+use App\Http\Controllers\Api\V1\BlogController;
 use App\Http\Controllers\Api\V1\ProfileController;
 use App\Http\Controllers\Api\V1\ServiceCategoryController;
 use App\Http\Controllers\Api\V1\ServiceController;
@@ -22,4 +24,9 @@ Route::middleware('auth:sanctum')->group(function () {
 Route::prefix('v1')->group(function () {
     Route::apiResource('service-categories', ServiceCategoryController::class)->only(['index', 'show']);
     Route::apiResource('services', ServiceController::class);
+    Route::apiResource('blogs', BlogController::class);
+    Route::prefix('blogs-categories')->controller(BlogCategoryController::class)->group(function () {
+        Route::get('', 'index');
+        Route::get('{param}', 'show');
+    });
 });
