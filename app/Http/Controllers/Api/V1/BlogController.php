@@ -11,12 +11,17 @@ class BlogController extends Controller
 {
     public function index()
     {
-        $blogs = QueryBuilder::for(Blog::class)
+        $query=Blog::query()->when(request('category'), function($q){
+            $q->whereHas('category', function($q2){
+                $q2->where('slug', request('category'));
+            });
+        });
+        $blogs = QueryBuilder::for($query)
             ->active()
             ->allowedIncludes(['category', 'user', 'comments', 'comments.user'])
             ->defaultSort('-id')
             ->allowedSorts(['title', 'created_at'])
-            ->allowedFilters(['title', 'slug'])->get();
+            ->allowedFilters(['title', 'slug'])->paginate(12);
 
         return BlogResource::collection($blogs);
 
@@ -30,6 +35,7 @@ class BlogController extends Controller
             })
             ->active()
             ->allowedIncludes(['category', 'user', 'comments', 'comments.user'])
+            ->withCount('comments') 
             ->firstOrFail();
 
         return new BlogResource($blog);

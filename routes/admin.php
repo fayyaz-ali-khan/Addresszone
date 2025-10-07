@@ -20,6 +20,8 @@ use App\Http\Controllers\admin\ServiceCategoryController;
 use App\Http\Controllers\admin\ServiceController;
 use App\Http\Controllers\GeneralSettingController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\admin\CommentController;
+
 
 Route::prefix('admin')->middleware('redirectAuth')->controller(AuthController::class)->group(function () {
 
@@ -53,4 +55,5 @@ Route::prefix('admin')->middleware('auth:admin')->group(function () {
     Route::resource('blogs', BlogController::class);
     Route::resource('blog-categories', BlogCategoryController::class)->only(['index', 'store', 'update', 'destroy']);
     Route::resource('send-notifications', SendNotificationController::class)->only(['index', 'store', 'create']);
+    Route::resource('comments', CommentController::class);
 });

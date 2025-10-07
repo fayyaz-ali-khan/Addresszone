@@ -18,7 +18,7 @@ class CommentResource extends JsonResource
             'author' => new UserResource($this->whenLoaded('user')),
             'blog_id' => $this->blog_id,
             'blog' => new BlogResource($this->whenLoaded('blog')),
-            'created_at' => $this->created_at,
+            'created_at' => $this->created_at->format('d M, Y'),
         ];
     }
 }

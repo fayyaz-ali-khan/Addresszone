@@ -17,7 +17,7 @@ class BlogCategoryResource extends JsonResource
             'slug' => $this->slug,
             'name' => $this->name,
             'id' => $this->id,
-            'blogs_count' => $this->blogs_count,
+            'blogs_count' => $this->whenCounted('blogs'),
             'blogs' => BlogResource::collection($this->whenLoaded('blogs')),
         ];
     }

@@ -15,7 +15,7 @@ class BlogCategoryController extends Controller
         $categories = QueryBuilder::for(BlogCategory::class)
             ->active()
             ->allowedIncludes(['blogs', 'blogs.user'])
-            ->allowedFilters(['name', 'slug'])->get();
+            ->allowedFilters(['name', 'slug'])->withCount('blogs')->get();
         return BlogCategoryResource::collection($categories);
     }
 

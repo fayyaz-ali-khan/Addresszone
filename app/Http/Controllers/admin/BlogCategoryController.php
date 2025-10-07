@@ -66,12 +66,10 @@ class BlogCategoryController extends Controller
                 return '<span title="'.$row->description.'">'.substr($row->description, 0, 36).'</span>';
             })
             ->editColumn('created_at', function ($row) {
-                return $row->created_at->format('d-m-Y H:i');
+                return $row->created_at->format('d-m-Y H:i A');
             })
-            ->editColumn('created_by', function ($row) {
-                return $row->createdBy ? $row->createdBy->name : 'N/A';
-            })->editColumn('status', function ($row) {
-                return $row->status == 0 || $row->user_id ? '<span class="badge bg-danger-light">Expired</span>' : '<span class="badge bg-primary-light">Active</span>';
+            ->editColumn('status', function ($row) {
+                return $row->status == 0  ? '<span class="badge bg-danger-light">Inactive</span>' : '<span class="badge bg-primary-light">Active</span>';
             })
             ->addColumn('actions', function ($row) {
                 return '

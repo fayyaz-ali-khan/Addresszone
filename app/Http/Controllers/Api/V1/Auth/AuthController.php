@@ -13,15 +13,15 @@ class AuthController
     public function register(RegisterRequest $request): JsonResponse
     {
         $data = $request->validated();
-        $data['name'] = $data['first_name'].' '.$data['last_name'];
+        $data['name'] = $data['first_name'] . ' ' . $data['last_name'];
         $user = User::create($data);
 
-        // Sanctum token
         $token = $user->createToken('api')->plainTextToken;
 
         return response()->json([
-            'user' => $user,
-            'token' => $token,
+            'message' => 'Account created successfully',
+            'user'    => $user,
+            'token'   => $token,
         ], 201);
     }
 
@@ -29,8 +29,8 @@ class AuthController
     {
         $credentials = $request->validated();
 
-        if (! Auth::attempt($credentials)) {
-            return response()->json(['message' => 'Invalid credentials.'], 422);
+        if (!Auth::attempt($credentials)) {
+            return response()->json(['message' => 'Invalid credentials.'], 400);
         }
 
         $user = User::where('email', $credentials['email'])->first();
@@ -40,7 +40,8 @@ class AuthController
         $token = $user->createToken('api')->plainTextToken;
 
         return response()->json([
-            'user' => $user,
+            'message'=>'Login Successfully',
+            'user'  => $user,
             'token' => $token,
         ]);
     }
