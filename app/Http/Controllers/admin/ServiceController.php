@@ -129,7 +129,7 @@ class ServiceController extends Controller
     private function getServicesDataTable()
     {
 
-        $query = Service::query()->with('serviceCategory')->select('id', 'title', 'service_category_id', 'price', 'months', 'status', 'image')->latest();
+        $query = Service::query()->with('category')->select('id', 'title', 'service_category_id', 'price', 'months', 'status', 'image')->latest();
 
         return DataTables::of($query)
             ->editColumn('status', function ($row) {
@@ -139,15 +139,15 @@ class ServiceController extends Controller
                            <img class="avatar-70 rounded" src="'.asset('storage/'.$row->image).'" alt="#" data-original-title="" title="">
                         </div>';
             })
-            ->editColumn('serviceCategory', function ($row) {
+            ->editColumn('category', function ($row) {
 
-                return $row->serviceCategory->name;
+                return $row->category->name;
             })
             ->addColumn('actions', function ($row) {
                 return '
                 <div class="d-flex align-items-center justify-content-end list-action">
-                    <a 
-                        class="badge bg-success edit-btn mr-2" 
+                    <a
+                        class="badge bg-success edit-btn mr-2"
                         href="'.route('admin.services.edit', $row->id).'"
                         >
                         <i class="ri-pencil-line mr-0"></i>

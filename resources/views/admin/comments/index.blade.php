@@ -6,30 +6,23 @@
                 <div class="col-lg-12">
                     <div class="d-flex flex-wrap align-items-center justify-content-between mb-4">
                         <div>
-                            <h4 class="mb-3">Service Category List</h4>
+                            <h4 class="mb-3">Comments List</h4>
 
                         </div>
-                        <a href="{{ route('admin.services.create') }}"
-                            class="btn border  btn-info add-btn shadow-none mx-2 d-none d-md-block"><i
-                                class="las la-plus mr-2"></i>New
-                            Service</a>
                     </div>
                 </div>
                 <div class="col-lg-12">
                     <div class="table-responsive rounded mb-3">
-                        <table id="services-data-table" class=" table mb-0 tbl-server-info">
+                        <table id="comments-data-table" class=" table mb-0 tbl-server-info">
                             <thead class="bg-white text-uppercase">
 
-                                <tr class="ligth ligth-data">
-                                    <th>#</th>
-                                    <th>Image</th>
-                                    <th>Title</th>
-                                    <th>Category</th>
-                                    <th>Price</th>
-                                    <th>Months</th>
-                                    <th>Status</th>
-                                    <th>Action</th>
-                                </tr>
+                            <tr class="ligth ligth-data">
+                                <th>User</th>
+                                <th>Comment</th>
+                                <th>Blog</th>
+                                <th>Date</th>
+                                <th>Action</th>
+                            </tr>
                             </thead>
 
                         </table>
@@ -48,64 +41,66 @@
     <script>
         $(document).ready(function() {
 
-            // ------------------ START: coupon data table ------------------//
-            $('#services-data-table').DataTable({
+            // ------------------ START: Comments data table ------------------//
+            $('#comments-data-table').DataTable({
                 processing: true,
                 serverSide: true,
-                ajax: "{{ route('admin.services.index') }}",
+                ajax: "{{ route('admin.comments.index') }}",
 
-                columns: [{
-                        data: 'id',
-                        name: 'id'
-                    },
+                columns: [
                     {
-                        data: 'image',
-                    },
-                    {
-                        data: 'title',
-                    },
-                    {
-                        data: 'category',
-                        searchable: false
-
+                        data: 'user_profile',
+                        name: 'user_profile',
+                        orderable: false,
+                        searchable: false,
+                        className: "text-center",
+                        width: "10%"
                     },
 
                     {
-                        data: 'price',
-                        render: function(data) {
-                            return '$ ' + data;
-                        }
+                        data: 'comment',
+                        name: 'comment',
+                        searchable: false,
+                        width: "15%"
                     },
                     {
-                        data: 'months',
-
+                        data: 'blog_title',
+                        name: 'blog_title',
+                        searchable: false,
+                        width: "15%"
                     },
                     {
-                        data: 'status',
-
+                        data: 'created_at',
+                        name: 'created_at',
+                        searchable: false,
+                        width: "15%"
                     },
-
                     {
                         data: 'actions',
                         name: 'actions',
                         orderable: false,
-                        searchable: false
-                    },
-                ]
+                        searchable: false,
+                        className: "text-center",
+                        width: "5%"
+                    }
+                ],
+
+                // Optional: responsive + default ordering
+                responsive: true,
+                language: {
+                    search: "_INPUT_",
+                    searchPlaceholder: "Search comments..."
+                }
             });
-            // ------------------ END: coupon data table ------------------//
+            // ------------------ END: Comments data table ------------------//
 
-
-
-
-
-            // ------------------ START: Delete coupon ------------------//
-            $(document).on('click', '.delete-service', function(e) {
+            // ------------------ START: Delete comment ------------------//
+            $(document).on('click', '.delete-comment', function(e) {
                 e.preventDefault();
 
                 Swal.fire({
                     title: "Are you sure?",
-                    text: "You can revert this!, All the related data will be deleted",
+                    text: "You can revert this!",
                     icon: "warning",
                     showCancelButton: true,
                     confirmButtonColor: "#3085d6",
@@ -115,17 +110,18 @@
                     if (result.isConfirmed) {
                         NProgress.start();
                         let id = $(this).data('id');
-                        let url = `{{ route('admin.services.destroy', ':id') }}`.replace(
+                        let url = `{{ route('admin.comments.destroy', ':id') }}`.replace(
                             ':id', id);
                         $.ajax({
                             url: url,
                             type: "DELETE",
+                            blockUI: true,
                             data: {
                                 id: id,
                                 _token: '{{ csrf_token() }}'
                             },
                             success: function(response) {
-                                $('#services-data-table').DataTable().ajax
+                                $('#comments-data-table').DataTable().ajax
                                     .reload();
                                 toastr.success(
                                     response.message
@@ -143,8 +139,7 @@
 
 
             });
-            // ------------------ END: Delete coupon ------------------//
-
+            // ------------------ END: Delete comment ------------------//
 
         });
     </script>

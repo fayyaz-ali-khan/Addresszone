@@ -95,6 +95,7 @@ class BlogController extends Controller
 
         $data['slug'] = Str::slug($data['title']);
         $data['status'] = $request->boolean('status');
+        $data['blog_category_id'] = $data['category'];
 
         if ($request->hasFile('image') && $request->file('image')->isValid()) {
             if ($blog->image) {
@@ -146,8 +147,8 @@ class BlogController extends Controller
             ->addColumn('actions', function ($row) {
                 return '
                 <div class="d-flex align-items-center list-action">
-                    <a 
-                        class="badge bg-success edit-btn mr-2" 
+                    <a
+                        class="badge bg-success edit-btn mr-2"
                         href="'.route('admin.blogs.edit', $row->id).'"
                     >
                         <i class="ri-pencil-line mr-0"></i>

@@ -5,14 +5,14 @@ namespace App\Http\Controllers\Api\V1;
 use App\Http\Requests\Profile\UpdateProfileRequest;
 use App\Traits\FileHandler;
 use Illuminate\Http\JsonResponse;
-
+use App\Http\Resources\UserResource;
 class ProfileController
 {
     use FileHandler;
 
     public function show(): JsonResponse
     {
-        return response()->json(['user' => request()->user()]);
+        return response()->json(['user' => new UserResource(request()->user())]);
     }
 
     public function update(UpdateProfileRequest $request): JsonResponse

@@ -8,12 +8,15 @@ use App\Http\Controllers\Api\V1\ProfileController;
 use App\Http\Controllers\Api\V1\ServiceCategoryController;
 use App\Http\Controllers\Api\V1\ServiceController;
 use App\Http\Controllers\Api\V1\CommentController;
+use App\Http\Controllers\Api\V1\ContactController;
+
 use Illuminate\Support\Facades\Route;
 
 Route::prefix('v1')->group(function () {
     Route::post('/auth/register', [AuthController::class, 'register']);
     Route::post('/auth/login', [AuthController::class, 'login']);
     Route::post('/auth/forgot-password', [PasswordResetController::class, 'sendResetLink']);
+    Route::post('/auth/verify-otp', [PasswordResetController::class, 'verifyOtp']);
     Route::post('/auth/reset-password', [PasswordResetController::class, 'reset']);
 
     // Protected
@@ -32,6 +35,8 @@ Route::prefix('v1')->group(function () {
         Route::get('', 'index');
         Route::get('{param}', 'show');
     });
+
+    Route::post('/contact', ContactController::class);
 
     Route::middleware('auth:sanctum')->group(function () {
         Route::apiResource('comments', CommentController::class)->except(['index']);

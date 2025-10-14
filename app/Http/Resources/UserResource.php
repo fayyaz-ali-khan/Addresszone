@@ -23,19 +23,12 @@ class UserResource extends JsonResource
             'company_name' => $this->company_name,
             'document_delivery_address' => $this->document_delivery_address,
             'address' => $this->address,
-            'remember_token' => $this->remember_token,
-            'password' => $this->password,
-            'email_verified_at' => $this->email_verified_at,
-            'image' => $this->image,
+            'image' => asset('storage/'.$this->image)?:asset('admin/images/avatar.png'),
             'mobile' => $this->mobile,
-            'user_type' => $this->user_type,
             'email' => $this->email,
             'last_name' => $this->last_name,
             'first_name' => $this->first_name,
             'name' => $this->name,
-            'id' => $this->id,
-            'tokens_count' => $this->tokens_count,
-            'notifications_count' => $this->notifications_count,
         ];
     }
 }
