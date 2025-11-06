@@ -31,6 +31,7 @@ class User extends Authenticatable
         'document_delivery_address',
         'company_name',
         'country',
+        'image',
         'CNIC_Front_Image',
         'CNIC_Back_Image',
         'Passport_Front_Image',

@@ -27,7 +27,7 @@
                     </a>
                 </li>
                 <li class=" {{ request()->routeIs('admin.customers.*') ? 'active' : '' }}">
-                    <a href="#people" class="collapsed" data-toggle="collapse" aria-expanded="false">
+                    <a href="{{ route('admin.customers.index') }}">
                         <svg class="svg-icon" id="p-dash8" width="20" height="20"
                             xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                             stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -37,28 +37,9 @@
                             <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
                         </svg>
                         <span class="ml-4">Customers</span>
-                        <svg class="svg-icon iq-arrow-right arrow-active" width="20" height="20"
-                            xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <polyline points="10 15 15 20 20 15"></polyline>
-                            <path d="M4 4h7a4 4 0 0 1 4 4v12"></path>
-                        </svg>
-                    </a>
-                    <ul id="people"
-                        class="iq-submenu collapse {{ request()->routeIs('admin.customers.*') ? 'show' : '' }} "
-                        data-parent="#iq-sidebar-toggle">
-                        <li class="">
-                            <a href="{{ route('admin.customers.index') }}">
-                                <i class="las la-minus"></i><span>Customers</span>
-                            </a>
-                        </li>
-                        <li class="">
-                            <a href=href="{{ route('admin.customers.create') }}">
-                                <i class="las la-minus"></i><span>Add Customers</span>
-                            </a>
-                        </li>
 
-                    </ul>
+                    </a>
+
                 </li>
                 <li class=" {{ request('type') == 'paid' || request('type') == 'unpaid' ? 'active' : '' }}">
                     <a href="#product" class="collapsed" data-toggle="collapse" aria-expanded="false">
@@ -71,8 +52,8 @@
                         </svg>
                         <span class="ml-4">Orders</span>
                         <svg class="svg-icon iq-arrow-right arrow-active" width="20" height="20"
-                            xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
-                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <polyline points="10 15 15 20 20 15"></polyline>
                             <path d="M4 4h7a4 4 0 0 1 4 4v12"></path>
                         </svg>
@@ -166,7 +147,9 @@
 
                 <li class="{{ request()->routeIs('admin.reports.*') ? 'active' : '' }}">
                     <a href="{{ route('admin.reports.index') }}" class="">
-                        <svg class="svg-icon iq-chart-report" width="20" height="20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <svg class="svg-icon iq-chart-report" width="20" height="20"
+                            xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <path d="M14 3v4a1 1 0 0 0 1 1h4"></path>
                             <path d="M17 21H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h7l5 5v11a2 2 0 0 1-2 2z"></path>
                             <path d="M9 17v-5"></path>
@@ -181,7 +164,9 @@
                 <li
                     class=" {{ request()->routeIs('admin.blog-categories.*') || request()->routeIs('admin.blogs.*') ? 'active' : '' }}">
                     <a href="#blogs" class="collapsed" data-toggle="collapse" aria-expanded="false">
-                        <svg class="svg-icon iq-blog" width="20" height="20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <svg class="svg-icon iq-blog" width="20" height="20"
+                            xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
                             <polyline points="14 2 14 8 20 8"></polyline>
                             <line x1="16" y1="13" x2="8" y2="13"></line>
@@ -223,8 +208,8 @@
                 <li class="{{ request()->routeIs('admin.send-notifications.*') ? 'active' : '' }}">
                     <a href="{{ route('admin.send-notifications.index') }}" class="">
                         <svg class="svg-icon" id="p-notification" width="20" height="20"
-                             xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
-                             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"></path>
                             <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
                         </svg>
@@ -233,25 +218,28 @@
                     </a>
 
                 </li>
-{{--                <li class="{{ request()->routeIs('admin.currencies.*') ? 'active' : '' }}">--}}
-{{--                    <a href="{{ route('admin.currencies.index') }}" class="">--}}
-{{--                        <svg class="svg-icon" id="p-dash7" width="20" height="20"--}}
-{{--                            xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"--}}
-{{--                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">--}}
-{{--                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>--}}
-{{--                            <polyline points="14 2 14 8 20 8"></polyline>--}}
-{{--                            <line x1="16" y1="13" x2="8" y2="13"></line>--}}
-{{--                            <line x1="16" y1="17" x2="8" y2="17"></line>--}}
-{{--                            <polyline points="10 9 9 9 8 9"></polyline>--}}
-{{--                        </svg>--}}
-{{--                        <span class="ml-4">Currency</span>--}}
-{{--                    </a>--}}
+                {{--                <li class="{{ request()->routeIs('admin.currencies.*') ? 'active' : '' }}"> --}}
+                {{--                    <a href="{{ route('admin.currencies.index') }}" class=""> --}}
+                {{--                        <svg class="svg-icon" id="p-dash7" width="20" height="20" --}}
+                {{--                            xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" --}}
+                {{--                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"> --}}
+                {{--                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path> --}}
+                {{--                            <polyline points="14 2 14 8 20 8"></polyline> --}}
+                {{--                            <line x1="16" y1="13" x2="8" y2="13"></line> --}}
+                {{--                            <line x1="16" y1="17" x2="8" y2="17"></line> --}}
+                {{--                            <polyline points="10 9 9 9 8 9"></polyline> --}}
+                {{--                        </svg> --}}
+                {{--                        <span class="ml-4">Currency</span> --}}
+                {{--                    </a> --}}
 
-{{--                </li>--}}
+                {{--                </li> --}}
                 <li class="{{ request()->routeIs('admin.email_templates.*') ? 'active' : '' }}">
                     <a href="{{ route('admin.email_templates.index') }}" class="">
-                        <svg class="svg-icon iq-email" width="20" height="20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                        <svg class="svg-icon iq-email" width="20" height="20"
+                            xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z">
+                            </path>
                             <polyline points="22,6 12,13 2,6"></polyline>
                         </svg> <span class="ml-4">Email Templates</span>
                     </a>
@@ -259,9 +247,13 @@
                 </li>
                 <li class="{{ request()->routeIs('admin.general_settings.*') ? 'active' : '' }}">
                     <a href="{{ route('admin.general_settings.index') }}" class="">
-                        <svg class="svg-icon iq-settings" width="20" height="20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <svg class="svg-icon iq-settings" width="20" height="20"
+                            xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <circle cx="12" cy="12" r="3"></circle>
-                            <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+                            <path
+                                d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z">
+                            </path>
                         </svg> <span class="ml-4">Settings</span>
                     </a>
 

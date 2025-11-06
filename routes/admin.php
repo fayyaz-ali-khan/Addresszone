@@ -39,6 +39,7 @@ Route::prefix('admin')->middleware('auth:admin')->group(function () {
 
     Route::get('/dashboard', DashboardController::class)->name('dashboard');
     Route::put('/{customer}/update-verification-status', [CustomerController::class, 'updateVerificationStatus'])->name('customers.update-verification-status');
+    Route::get('/customers/search', [CustomerController::class, 'search'])->name('customers.search');
     Route::resource('customers', CustomerController::class);
     Route::resource('orders', OrderController::class);
     Route::resource('documents', DocumentController::class);
