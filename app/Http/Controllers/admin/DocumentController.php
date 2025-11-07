@@ -76,9 +76,10 @@ class DocumentController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Document $document)
     {
-        //
+        $document->load('user:id,name,first_name,last_name,email,mobile');
+        return view('admin.documents.edit', compact('document'));
     }
 
     /**
@@ -86,27 +87,22 @@ class DocumentController extends Controller
      */
     public function update(Request $request, Document $document)
     {
-        $request->validate([
+        $validated = $request->validate([
             'document_title' => 'required|max:500',
-            'document_file' => 'nullable|file|mimes:pdf,doc,docx,jpg,png|max:2048',
-            'reason' => 'nullable|string',
-            'status' => 'boolean',
+            'documents' => 'nullable|file',
+            'customer' => 'required|exists:users,id',
         ]);
 
-        if ($request->hasFile('document_file')) {
-            Storage::disk('public')->delete($document->document_file);
-            $path = $request->file('document_file')->store('documents', 'public');
-            $document->document_file = $path;
+        if ($request->hasFile('documents')) {
+            $validated['document_file'] = $this->updateFile($request->file('documents'), $document->document_file, 'documents');
         }
 
-        $document->update([
-            'document_title' => $request->document_title,
-            'reason' => $request->reason,
-            'status' => $request->status ?? false,
-            'updated_by' => Auth::id(),
-        ]);
+        $validated['user_id'] = $validated['customer'];
+        unset($validated['customer']);
+        $validated['updated_at'] = Auth::id();
+        $document->update($validated);
 
-        return redirect()->route('documents.index')->with('success', 'Document updated successfully.');
+        return response()->json(['message' => 'Document updated successfully']);
     }
 
     /**

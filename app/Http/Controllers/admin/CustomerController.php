@@ -44,6 +44,7 @@ class CustomerController extends Controller
     public function show(User $customer)
     {
         if (request()->ajax()) {
+            $customer->load('documents');
             return response()->json(new UserResource($customer));
         }
 

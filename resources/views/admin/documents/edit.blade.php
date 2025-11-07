@@ -1,7 +1,7 @@
 @extends('admin.layout.app')
 
 @section('main-content')
-    <x-Admin.Shared.form-page-container title="Customer Details">
+    <x-Admin.Shared.form-page-container title="Edit Document">
         <div class="row">
 
             <div class="col-sm-12 col-md-6 mb-3">
@@ -113,8 +113,10 @@
         </div>
         <hr>
         <div.row>
-            <form action="{{ route('admin.documents.store') }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('admin.documents.update', $document->id) }}" method="POST"
+                enctype="multipart/form-data">
                 @csrf
+                @method('PUT')
                 <input type="hidden" name="customer" id="customer-id" value="" />
                 <div class="form-row">
                     <div class="col-sm-6 col-md-4">
@@ -123,7 +125,8 @@
                             'has-error' => $errors->has('verification_status'),
                         ])>
                             <label for="name">Document Title</label>
-                            <input type="text" name="document_title[]" class="form-control" />
+                            <input type="text" value="{{ $document->document_title }}" name="document_title"
+                                class="form-control" />
                             <x-Shared.input-error field="verification_status" />
                         </div>
                     </div>
@@ -133,13 +136,13 @@
                             'has-error' => $errors->has('verification_msg'),
                         ])>
                             <label> Document File</label>
-                            <input type="file" name="documents[]" class="form-control" />
+                            <input type="file" name="documents" class="form-control" />
                             <x-Shared.input-error field="verification_msg" />
                         </div>
                     </div>
-                    <div class="col-sm-6 col-md-4 d-flex align-items-center">
-                        <button class="btn btn-info add-more-document mt-4" type="button" id="add-document"
-                            title="Add more documents"> <i class="ri-add-fill"></i></button>
+                    <div class="col-sm-6 col-md-4 d-flex align-items-end ">
+                        <a class="mb-3" title="Click to view file"
+                            href="{{ asset('storage/' . $document->document_file) }}" target="_blank">View document</a>
                     </div>
 
                 </div>
@@ -153,6 +156,7 @@
 @push('js')
     <script>
         $(document).ready(function() {
+
             // Initialize Select2
             $('#document-user').select2({
                 placeholder: 'Select a user',
@@ -179,6 +183,17 @@
 
             });
 
+            const userData = @json($document->user);
+            let userId = userData.id;
+            let userText = `${userData.first_name} ${userData.last_name} (${userData.email}) (${userData.mobile})`
+
+            // Create a new option and trigger Select2
+            let newOption = new Option(userText, userId, true, true);
+            $('#document-user').append(newOption).trigger('change');
+
+            setTimeout(() => {
+                $('#document-user').trigger('change');
+            }, 500);
             // When selection changes
             $('#document-user').on('change', function() {
 
@@ -243,40 +258,6 @@
                     });
                 }
             });
-
-            // When user clicks "Add More Document"
-            $(document).on('click', '.add-more-document', function(e) {
-                e.preventDefault();
-
-                let newRow = `
-                <div class="form-row">
-                    <div class="col-sm-6 col-md-4">
-                        <div class="form-group">
-                            <input type="text" name="document_title[]" class="form-control" />
-                        </div>
-                    </div>
-                    <div class="col-sm-6 col-md-4">
-                        <div class="form-group">
-                            <input type="file" name="documents[]" class="form-control" />
-                        </div>
-                    </div>
-                    <div class="col-sm-6 col-md-4 ">
-                        <button class="btn btn-warning remove-document" type="button" title="Remove Document">
-                            <i class="ri-delete-bin-2-fill"></i>
-                        </button>
-                    </div>
-                </div>`;
-
-                // Add new row after current form-row
-                $(this).closest('.form-row').after(newRow);
-            });
-
-            // When user clicks "Remove Document"
-            $(document).on('click', '.remove-document', function(e) {
-                e.preventDefault();
-                $(this).closest('.form-row').remove();
-            });
-
 
             $('form').on('submit', function(e) {
                 e.preventDefault();

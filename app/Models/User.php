@@ -65,6 +65,11 @@ class User extends Authenticatable
         ];
     }
 
+    public function documents()
+    {
+        return $this->hasMany(Document::class);
+    }
+
     public function sendPasswordResetNotification($token): void
     {
         // Send only for API users (using sanctum or api guard)

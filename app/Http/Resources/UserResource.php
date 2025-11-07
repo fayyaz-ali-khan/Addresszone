@@ -31,6 +31,8 @@ class UserResource extends JsonResource
             'Passport_Front_Image' => $this->Passport_Front_Image ? asset('storage/' . $this->Passport_Front_Image) : null,
             'CNIC_Back_Image' => $this->CNIC_Back_Image ? asset('storage/' . $this->CNIC_Back_Image) : null,
             'CNIC_Front_Image' => $this->CNIC_Front_Image ? asset('storage/' . $this->CNIC_Front_Image) : null,
+
+            'documents' => DocumentResource::collection($this->whenLoaded('documents'))
         ];
     }
 }
