@@ -19,6 +19,8 @@ class ServiceResource extends JsonResource
             'description' => $this->description,
             'image' => asset('storage/'.$this->image),
             'category' => new ServiceCategoryResource($this->whenLoaded('category')),
+            'start_date'=>now()->format('d-m-Y'),
+            'end_date'=>now()->addMonths($this->months)->format('d-m-Y'),
         ];
     }
 }

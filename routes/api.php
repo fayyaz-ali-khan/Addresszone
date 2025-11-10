@@ -50,4 +50,6 @@ Route::prefix('v1')->group(function () {
 
     Route::get('get-page/{page}', [PageController::class, 'index']);
     Route::get('general-data', [GeneralController::class, 'generalAppData']);
+    Route::get('countries', [GeneralController::class, 'countries']);
+
 });

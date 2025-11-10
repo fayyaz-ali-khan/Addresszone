@@ -19,8 +19,10 @@ class ServiceController extends Controller
         return ServiceResource::collection($services);
     }
 
-    public function show(Service $service)
+    public function show($slug )
     {
+        $service=Service::where('slug',$slug)->firstOrFail();
+
         if (request()->query('include') === 'category') {
             $service->load('category');
         }
